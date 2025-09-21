@@ -1,11 +1,273 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Moonlight AT</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Moonlight AT — Поездки по Балканам</title>
+  <meta name="description" content="Moonlight AT — трансферы и поездки по Черногории, Сербии и Боснии. Удобно, безопасно, комфортно."/>
+  <style>
+    :root{
+      --bg:#f7f6f5;
+      --card:#ffffff;
+      --accent:#6b2e2e;
+      --muted:#5a4f4f;
+      --text:#1e1e1e;
+      --accent-2:#d97706;
+      --radius:12px;
+      --shadow: 0 6px 20px rgba(20,20,20,0.08);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#fff);
+      color:var(--text);
+      line-height:1.6;
+      font-size:17px;
+    }
+    header{
+      background:linear-gradient(90deg, rgba(107,46,46,0.95), rgba(217,118,6,0.95));
+      color:white;
+      padding:28px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+    .nav{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .brand{
+      font-weight:700;
+      font-size:20px;
+      letter-spacing:0.4px;
+    }
+    .nav-right{margin-left:auto; display:flex; gap:10px; align-items:center;}
+    .btn{
+      background:rgba(255,255,255,0.12);
+      color:white;
+      border:1px solid rgba(255,255,255,0.14);
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.2s;
+    }
+    .btn:hover{ background:rgba(255,255,255,0.25); }
+
+    main{ max-width:1100px; margin:32px auto; padding:0 18px;}
+    h1{ margin:6px 0 10px; font-size:34px; color:var(--accent);}
+    h2{ color:var(--accent); margin-top:32px; font-size:26px;}
+    p.lead{color:var(--muted); margin:0 0 16px; font-size:18px;}
+
+    /* Tabs */
+    .tabs{ margin-top:22px; }
+    .tab-menu{ display:flex; gap:12px; }
+    .tab{
+      padding:10px 16px;
+      border-radius:10px;
+      cursor:pointer;
+      background:transparent;
+      border:1px solid transparent;
+      color:#4a3f3f;
+      font-weight:600;
+    }
+    .tab.active{ background:var(--card); border-color:#e9e2e2; box-shadow:0 6px 18px rgba(60,30,30,0.04); color:var(--accent);}
+    .tab-content{ margin-top:18px; padding:16px; background:var(--card); border-radius:10px; box-shadow:var(--shadow); }
+
+    /* Cards */
+    .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:12px;}
+    .tour{
+      background:#fff;
+      border-radius:12px;
+      padding:12px;
+      box-shadow:0 4px 14px rgba(20,20,20,0.06);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .tour img{ width:100%; height:160px; object-fit:cover; border-radius:8px; }
+    .tour h3{ margin:4px 0; font-size:18px; color:var(--accent);}
+    .tour p{ margin:0; color:var(--muted); font-size:15px;}
+    .price{ font-weight:700; color:var(--accent-2); }
+
+    /* Gallery */
+    .gallery{ margin-top:26px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .gallery img{ width:100%; height:140px; object-fit:cover; border-radius:8px; }
+
+    /* Reviews */
+    .reviews{ margin-top:40px; }
+    .reviews-list{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; margin-top:18px;}
+    .review{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+      font-size:15px;
+      color:var(--muted);
+    }
+    .review strong{color:var(--accent); display:block; margin-bottom:6px;}
+
+    /* Contact */
+    .contact-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      margin-top:24px;
+    }
+    .contact-links{display:flex; flex-direction:column; gap:10px; margin-top:14px;}
+    .contact-links a{color:var(--accent); font-weight:600; text-decoration:none;}
+    .contact-links a:hover{text-decoration:underline;}
+
+    footer{ text-align:center; color:var(--muted); padding:28px 12px; margin-top:28px; }
+    @media (max-width:700px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:500px){ .gallery{ grid-template-columns:1fr; } }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Moonlight AT</h1>
-  <p>Transport services across the Balkans.</p>
+  <header>
+    <div class="nav">
+      <div class="brand">Moonlight AT</div>
+      <div class="nav-right">
+        <button class="btn" onclick="scrollToSection('tours')">Поездки</button>
+        <button class="btn" onclick="scrollToSection('gallery')">Галерея</button>
+        <button class="btn" onclick="scrollToSection('reviews')">Отзывы</button>
+        <button class="btn" onclick="scrollToSection('contact')">Контакты</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h1>Поездки по Балканам</h1>
+      <p class="lead">Moonlight AT — трансферы и поездки по <strong>Черногории, Сербии и Боснии</strong>. Удобно, безопасно и с комфортом.</p>
+      <p>С нами вы сможете насладиться природой, атмосферными городами и культурным наследием региона. Мы предлагаем групповые и индивидуальные туры.</p>
+    </section>
+
+    <section class="tabs" id="tours">
+      <div class="tab-menu">
+        <button class="tab active" data-tab="group">Групповые поездки</button>
+        <button class="tab" data-tab="private">Индивидуальные туры</button>
+        <button class="tab" data-tab="transfer">Трансферы</button>
+      </div>
+
+      <div class="tab-content" id="tab-group" data-panel>
+        <p>Наши групповые поездки — это возможность недорого и весело посетить самые красивые уголки Балкан.</p>
+        <div class="cards">
+          <article class="tour">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=60" loading="lazy" alt="Горы Черногории">
+            <h3>Черногория: побережье и горы</h3>
+            <p>Совместная поездка к Котору и Будве. Цена зависит от количества человек.</p>
+            <div class="price">Цена по запросу</div>
+          </article>
+          <article class="tour">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60" alt="Адриатическое море">
+            <h3>Адриатическое море</h3>
+            <p>Морское побережье, старые улочки и солнечные пляжи ждут вас.</p>
+            <div class="price">Цена по запросу</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-private" data-panel hidden>
+        <p>Индивидуальные туры настраиваем под ваши даты и интересы.</p>
+        <div class="cards">
+          <article class="tour">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=60" alt="Природа Сербии">
+            <h3>Сербия: уютные города и природа</h3>
+            <p>Вы сами выбираете маршрут, а мы предоставляем машину и водителя.</p>
+            <div class="price">Цена по запросу</div>
+          </article>
+          <article class="tour">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=60" alt="Балканские деревни">
+            <h3>Балканские деревни</h3>
+            <p>Окунитесь в атмосферу деревень, где время течёт медленнее.</p>
+            <div class="price">Цена по запросу</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-transfer" data-panel hidden>
+        <p>Трансферы по Сербии, до аэропорта, на Внж, небольшие переезды</p>
+        <div class="cards">
+          <article class="tour">
+            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=60" alt="Трансфер в аэропорт">
+            <h3>Аэропорт — Белград</h3>
+            <p>Комфортная машина, вежливый водитель. Время в пути ~40 минут.</p>
+            <div class="price">Цена по запросу</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h2>Галерея</h2>
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" alt="Река и мост">
+        <img src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=800&q=80" alt="Старый город">
+
+        <!-- Новые фото природы -->
+        <img src="https://tse3.mm.bing.net/th/id/OIP.JqDxVuorbM6XF9qemVMvwQHaEK?pid=Api" alt="Природа Сербии — холмы и поля">
+        <img src="https://tse2.mm.bing.net/th/id/OIP.akhiiuPlQyM4fEpKEggn7wHaFc?pid=Api" alt="Лес в Сербии">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.9mgpdnzDe6XHmrRcFD2w2wHaEc?pid=Api" alt="Горы Сербии">
+        <img src="https://tse1.mm.bing.net/th/id/OIP.JSymg7DXJnQS4bLe8ICWEQHaDV?pid=Api" alt="Балканские горы">
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>О компании</h2>
+      <p>Moonlight AT — команда опытных водителей, которые знают дороги и особенности Балкан. Мы предлагаем не просто трансферы, а настоящие путешествия. В дороге мы всегда готовы подсказать интересные остановки, показать скрытые жемчужины и помочь вам насладиться регионом по максимуму.</p>
+      <p>Наша цель — сделать каждую поездку комфортной и запоминающейся.</p>
+    </section>
+
+    <section id="reviews" class="reviews">
+      <h2>Отзывы клиентов</h2>
+      <div class="reviews-list">
+        <div class="review">
+          <strong>Анна, Шабац</strong>
+          Поездка была просто потрясающей! Водитель показал нам такие места, куда мы сами точно бы не добрались.
+        </div>
+        <div class="review">
+          <strong>Милан, Белград</strong>
+          Очень удобный трансфер из аэропорта и обратно. Машина чистая, водитель вежливый. Буду обращаться ещё!
+        </div>
+        <div class="review">
+          <strong>София, Нови Сад</strong>
+          Заказывали индивидуальный тур. Всё прошло идеально — красивые виды, комфортная дорога и приятная атмосфера.
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-card">
+      <h2>Контакты</h2>
+      <p>Напишите нам для бронирования поездки:</p>
+      <div class="contact-links">
+        <a href="https://t.me/+381658371535" target="_blank">Telegram: +381658371535</a>
+        <a href="https://instagram.com/moonlightautotravel" target="_blank">Instagram: @moonlightautotravel</a>
+        <a href="tel:+381658371535">Телефон: +381658371535</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Moonlight AT — Поездки по Балканам. Все права защищены.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        btn.classList.add('active');
+        const name = btn.dataset.tab;
+        document.querySelectorAll('[data-panel]').forEach(panel=>panel.hidden=true);
+        document.getElementById('tab-'+name).hidden=false;
+      });
+    });
+    function scrollToSection(id){
+      document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+    }
+  </script>
 </body>
 </html>
